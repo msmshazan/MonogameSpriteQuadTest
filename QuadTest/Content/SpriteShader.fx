@@ -35,8 +35,7 @@ struct VertexShaderOutput
 VertexShaderOutput MainVS(in VertexShaderInput input, uint id:SV_VERTEXID)
 {
 	VertexShaderOutput output = (VertexShaderOutput)0;
-	int index = (int)id;
-	float2 corner = corners[index % 4];
+	float2 corner = corners[id % 4];
 	float2 pos = input.Pos.xy + (input.Dim*input.Scale*corner);
 	output.Position = mul(float4(pos.x,pos.y, input.Pos.z,1), MatrixTransform);
 	output.UV =  (input.UV + (input.Dim * corner) )*TextureDim.zw;
