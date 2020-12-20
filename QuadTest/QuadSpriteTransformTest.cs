@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QuadTest
 {
-    public class Game1 : Game
+    public class QuadSpriteTransformTest : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -15,7 +15,7 @@ namespace QuadTest
         private IndexBuffer _indexBuffer;
         private Effect _shader;
 
-        public Game1()
+        public QuadSpriteTransformTest()
         {
             _graphics = new GraphicsDeviceManager(this);
             _graphics.GraphicsProfile = GraphicsProfile.HiDef;
@@ -28,12 +28,12 @@ namespace QuadTest
 
         protected override void Initialize()
         {
-            var verts = new List<SpriteVertex>();
-            verts.Add(new SpriteVertex(new Vector3(120, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(50), Color.White));
-            verts.Add(new SpriteVertex(new Vector3(120, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 1.5f), new Vector2(50), Color.White));
-            verts.Add(new SpriteVertex(new Vector3(200, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 0.5f), new Vector2(50), Color.White));
-            verts.Add(new SpriteVertex(new Vector3(200, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 1.5f), new Vector2(50), Color.White));
-            verts.Add(new SpriteVertex(new Vector3(350, 150, 1), new Vector2(1), new Vector2(1), new Vector2(50), Color.White));
+            var verts = new List<SpriteTransformVertex>();
+            verts.Add(new SpriteTransformVertex(new Vector3(120, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(120, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 1.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(200, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 0.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(200, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 1.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(350, 150, 1), new Vector2(1), new Vector2(1), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
             var indices = new List<short>();
             for (int i = 0; i < verts.Count; i++)
             {
@@ -44,7 +44,7 @@ namespace QuadTest
                 indices.Add((short)(i + 3));
                 indices.Add((short)(i + 2));
             }
-            _vertexBuffer = new VertexBuffer(GraphicsDevice, typeof(SpriteVertex), verts.Count, BufferUsage.None);
+            _vertexBuffer = new VertexBuffer(GraphicsDevice, typeof(SpriteTransformVertex), verts.Count, BufferUsage.None);
             _indexBuffer = new IndexBuffer(GraphicsDevice, IndexElementSize.SixteenBits, indices.Count, BufferUsage.None);
             _indexBuffer.SetData(indices.ToArray());
             _vertexBuffer.SetData(verts.ToArray());
@@ -55,7 +55,7 @@ namespace QuadTest
 
         protected override void LoadContent()
         {
-            _shader = Content.Load<Effect>("SpriteShader");
+            _shader = Content.Load<Effect>("SpriteShaderTransform");
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _pixel = new Texture2D(GraphicsDevice, 2, 2);
             _pixel.SetData(new[]

@@ -16,6 +16,12 @@
 #begin SpriteShader.fx
 /importer:EffectImporter
 /processor:EffectProcessor
-/processorParam:DebugMode=Auto
+/processorParam:DebugMode=Debug
 /build:SpriteShader.fx
+
+#begin SpriteShaderTransform.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:SpriteShaderTransform.fx
 
