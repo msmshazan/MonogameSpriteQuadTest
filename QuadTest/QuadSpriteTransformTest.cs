@@ -29,11 +29,11 @@ namespace QuadTest
         protected override void Initialize()
         {
             var verts = new List<SpriteTransformVertex>();
-            verts.Add(new SpriteTransformVertex(new Vector3(120, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(120, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 1.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(120, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Matrix.CreateScale(20) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(120, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 1.5f), Matrix.CreateScale(30) * Matrix.Identity, Color.White));
             verts.Add(new SpriteTransformVertex(new Vector3(200, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 0.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(200, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 1.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(350, 150, 1), new Vector2(1), new Vector2(1), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(200, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 1.5f), Matrix.CreateScale(70) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(350, 150, 1), new Vector2(1), new Vector2(1), Matrix.CreateScale(100) * Matrix.Identity, Color.White));
             var indices = new List<short>();
             for (int i = 0; i < verts.Count; i++)
             {
