@@ -7,7 +7,7 @@ namespace QuadTest
         [STAThread]
         static void Main()
         {
-            using (var game = new QuadSpriteTransformTest())
+            using (var game = new QuadSpriteTransformNoIndexTest())
                 game.Run();
         }
     }
