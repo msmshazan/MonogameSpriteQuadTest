@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using System;
+using Mat3x2 =  System.Numerics.Matrix3x2;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace QuadTest
@@ -11,10 +12,10 @@ namespace QuadTest
         public Vector3 Pos;
         public Vector2 Dim;
         public Vector2 UV;
-        public Matrix Transform;
+        public Mat3x2 Transform;
         public Color Color;
         public static readonly VertexDeclaration VertexDeclaration;
-        public SpriteTransformVertex(Vector3 position, Vector2 dimension, Vector2 uv, Matrix transform, Color color)
+        public SpriteTransformVertex(Vector3 position, Vector2 dimension, Vector2 uv, Mat3x2 transform, Color color)
         {
             Pos = position;
             Dim = dimension;
@@ -79,12 +80,11 @@ namespace QuadTest
                 new VertexElement(0, VertexElementFormat.Vector3, VertexElementUsage.Position, 0),
                 new VertexElement(12, VertexElementFormat.Vector2, VertexElementUsage.Position, 1),
                 new VertexElement(20, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 0),
-                new VertexElement(28, VertexElementFormat.Vector4, VertexElementUsage.TextureCoordinate, 1),
-                new VertexElement(44, VertexElementFormat.Vector4, VertexElementUsage.TextureCoordinate, 2),
-                new VertexElement(60, VertexElementFormat.Vector4, VertexElementUsage.TextureCoordinate, 3),
-                new VertexElement(76, VertexElementFormat.Vector4, VertexElementUsage.TextureCoordinate, 4),
+                new VertexElement(28, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 1),
+                new VertexElement(36, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 2),
+                new VertexElement(44, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 3),
 
-                new VertexElement(92, VertexElementFormat.Color, VertexElementUsage.Color, 0)
+                new VertexElement(52, VertexElementFormat.Color, VertexElementUsage.Color, 0)
             };
             VertexDeclaration = new VertexDeclaration(elements);
         }

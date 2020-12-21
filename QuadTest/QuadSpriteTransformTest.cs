@@ -1,7 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Mat3x2 = System.Numerics.Matrix3x2;
 using System.Collections.Generic;
+using Vector2 = Microsoft.Xna.Framework.Vector2;
+using Vector3 = Microsoft.Xna.Framework.Vector3;
+using Vector4 = Microsoft.Xna.Framework.Vector4;
 
 namespace QuadTest
 {
@@ -29,11 +33,11 @@ namespace QuadTest
         protected override void Initialize()
         {
             var verts = new List<SpriteTransformVertex>();
-            verts.Add(new SpriteTransformVertex(new Vector3(120, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),Matrix.CreateRotationZ(MathHelper.PiOver4) *Matrix.CreateScale(20) * Matrix.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(120, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 1.5f), Matrix.CreateScale(30) * Matrix.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(200, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 0.5f), Matrix.CreateScale(50) * Matrix.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(200, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 1.5f), Matrix.CreateRotationZ(MathHelper.PiOver4) * Matrix.CreateScale(70) * Matrix.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(400, 150, 1), new Vector2(1), new Vector2(1), Matrix.CreateRotationZ(-MathHelper.PiOver4/2) * Matrix.CreateScale(100) * Matrix.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(120, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),Mat3x2.CreateRotation(MathHelper.PiOver4) *Mat3x2.CreateScale(20) * Mat3x2.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(120, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 1.5f), Mat3x2.CreateScale(30) * Mat3x2.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(200, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 0.5f), Mat3x2.CreateScale(50) * Mat3x2.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(200, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 1.5f), Mat3x2.CreateRotation(MathHelper.PiOver4) * Mat3x2.CreateScale(70) * Mat3x2.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector3(400, 150, 1), new Vector2(1), new Vector2(1), Mat3x2.CreateRotation(-MathHelper.PiOver4/2) * Mat3x2.CreateScale(100) * Mat3x2.Identity, Color.White));
             var indices = new List<short>();
             for (int i = 0; i < verts.Count; i++)
             {
