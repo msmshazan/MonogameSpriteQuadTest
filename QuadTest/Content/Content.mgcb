@@ -22,7 +22,7 @@
 #begin SpriteShaderTransform.fx
 /importer:EffectImporter
 /processor:EffectProcessor
-/processorParam:DebugMode=Optimize
+/processorParam:DebugMode=Debug
 /build:SpriteShaderTransform.fx
 
 #begin SpriteShaderTransformNoIndex.fx

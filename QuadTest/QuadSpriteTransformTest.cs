@@ -33,11 +33,11 @@ namespace QuadTest
         protected override void Initialize()
         {
             var verts = new List<SpriteTransformVertex>();
-            verts.Add(new SpriteTransformVertex(new Vector3(120, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),Mat3x2.CreateRotation(MathHelper.PiOver4) *Mat3x2.CreateScale(20) * Mat3x2.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(120, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 1.5f), Mat3x2.CreateScale(30) * Mat3x2.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(200, 120, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 0.5f), Mat3x2.CreateScale(50) * Mat3x2.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(200, 200, 1), new Vector2(0.5f, 0.5f), new Vector2(1.5f, 1.5f), Mat3x2.CreateRotation(MathHelper.PiOver4) * Mat3x2.CreateScale(70) * Mat3x2.Identity, Color.White));
-            verts.Add(new SpriteTransformVertex(new Vector3(400, 150, 1), new Vector2(1), new Vector2(1), Mat3x2.CreateRotation(-MathHelper.PiOver4/2) * Mat3x2.CreateScale(100) * Mat3x2.Identity, Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector2(0, 0), new Vector2(1, 1), Mat3x2.CreateScale(20) * Mat3x2.CreateRotation(MathHelper.PiOver4) *  Mat3x2.CreateTranslation(120, 120) , Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector2(0, 1), new Vector2(1, 2),  Mat3x2.CreateScale(30) * Mat3x2.CreateTranslation(120, 200) , Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector2(1, 0), new Vector2(2, 1), Mat3x2.CreateScale(50) * Mat3x2.CreateTranslation(200, 120) , Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector2(1, 1), new Vector2(2, 2), Mat3x2.CreateScale(70) * Mat3x2.CreateRotation(MathHelper.PiOver4) *   Mat3x2.CreateTranslation(200, 200), Color.White));
+            verts.Add(new SpriteTransformVertex(new Vector2(0, 0), new Vector2(2, 2), Mat3x2.CreateScale(200) * Mat3x2.CreateRotation(-MathHelper.PiOver4 / 2) *  Mat3x2.CreateTranslation(400, 150) , Color.White));
             var indices = new List<short>();
             for (int i = 0; i < verts.Count; i++)
             {
@@ -48,7 +48,7 @@ namespace QuadTest
                 indices.Add((short)(i + 3));
                 indices.Add((short)(i + 2));
             }
-            _vertexBuffer = new VertexBuffer(GraphicsDevice, typeof(SpriteTransformVertex), verts.Count, BufferUsage.None);
+            _vertexBuffer = new VertexBuffer(GraphicsDevice, SpriteTransformVertex.VertexDeclaration, verts.Count, BufferUsage.None);
             _indexBuffer = new IndexBuffer(GraphicsDevice, IndexElementSize.SixteenBits, indices.Count, BufferUsage.None);
             _indexBuffer.SetData(indices.ToArray());
             _vertexBuffer.SetData(verts.ToArray());
@@ -84,6 +84,7 @@ namespace QuadTest
             GraphicsDevice.Clear(Color.CornflowerBlue);
             GraphicsDevice.Indices = _indexBuffer;
             GraphicsDevice.SetVertexBuffers(_vertexBindings);
+            _shader.Parameters["Z"].SetValue(1.0f);
             _shader.Parameters["Texture"].SetValue(_pixel);
             _shader.Parameters["TextureDim"].SetValue(new Vector4(_pixel.Width, _pixel.Height, 1.0f / _pixel.Width, 1.0f / _pixel.Height));
             _shader.Parameters["MatrixTransform"].SetValue(Matrix.CreateOrthographicOffCenter(0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 0, 0, -1));

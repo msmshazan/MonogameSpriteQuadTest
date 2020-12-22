@@ -9,17 +9,15 @@ namespace QuadTest
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct SpriteTransformVertex : IVertexType
     {
-        public Vector3 Pos;
-        public Vector2 Dim;
-        public Vector2 UV;
+        public Vector2 UV0;
+        public Vector2 UV1;
         public Mat3x2 Transform;
         public Color Color;
         public static readonly VertexDeclaration VertexDeclaration;
-        public SpriteTransformVertex(Vector3 position, Vector2 dimension, Vector2 uv, Mat3x2 transform, Color color)
+        public SpriteTransformVertex(Vector2 uv0, Vector2 uv1, Mat3x2 transform, Color color)
         {
-            Pos = position;
-            Dim = dimension;
-            UV = uv;
+            UV0 = uv0;
+            UV1 = uv1;
             Transform = transform;
             Color = color;
         }
@@ -33,9 +31,9 @@ namespace QuadTest
         {
             unchecked
             {
-                var hashCode = Pos.GetHashCode();
-                hashCode = (hashCode * 397) ^ Dim.GetHashCode();
-                hashCode = (hashCode * 397) ^ UV.GetHashCode();
+                var hashCode = UV0.GetHashCode();
+                hashCode = (hashCode * 397) ^ UV1.GetHashCode();
+                hashCode = (hashCode * 397) ^ Transform.GetHashCode();
                 hashCode = (hashCode * 397) ^ Color.GetHashCode();
                 return hashCode;
             }
@@ -43,14 +41,13 @@ namespace QuadTest
 
         public override string ToString()
         {
-            return $"Pos: {Pos} , UV : {UV} , Transform: {Transform},Dim : {Dim},Color : {Color}";
+            return $"UV0: {UV0} , UV1 : {UV1} , Transform: {Transform},Color : {Color}";
         }
 
         public static bool operator ==(SpriteTransformVertex left, SpriteTransformVertex right)
         {
-            return left.Pos == right.Pos
-                && left.Dim == right.Dim
-                && left.UV == right.UV
+            return left.UV0 == right.UV0
+                && left.UV1 == right.UV1
                 && left.Transform == right.Transform
                 && left.Color == right.Color;
         }
@@ -77,14 +74,14 @@ namespace QuadTest
         {
             var elements = new VertexElement[]
             {
-                new VertexElement(0, VertexElementFormat.Vector3, VertexElementUsage.Position, 0),
-                new VertexElement(12, VertexElementFormat.Vector2, VertexElementUsage.Position, 1),
-                new VertexElement(20, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 0),
-                new VertexElement(28, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 1),
-                new VertexElement(36, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 2),
-                new VertexElement(44, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 3),
-
-                new VertexElement(52, VertexElementFormat.Color, VertexElementUsage.Color, 0)
+                new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
+                new VertexElement(8, VertexElementFormat.Vector2, VertexElementUsage.Tangent, 0),
+                
+                new VertexElement(16, VertexElementFormat.Vector2, VertexElementUsage.Binormal, 0),
+                new VertexElement(24, VertexElementFormat.Vector2, VertexElementUsage.Binormal, 1),
+                new VertexElement(32, VertexElementFormat.Vector2, VertexElementUsage.Binormal, 2),
+                
+                new VertexElement(40, VertexElementFormat.Color, VertexElementUsage.Color, 0)
             };
             VertexDeclaration = new VertexDeclaration(elements);
         }
