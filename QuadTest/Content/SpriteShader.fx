@@ -46,7 +46,7 @@ VertexShaderOutput MainVS(in VertexShaderInput input, uint id:SV_VERTEXID)
 float4 MainPS(VertexShaderOutput input) : COLOR
 {
 	float2 uv = input.UV;
-	float4 texel = SAMPLE_TEXTURE(Texture, uv);
+	float4 texel = SAMPLE_TEXTURE(Texture, uv)*input.Color;
 	return texel;
 }
 
